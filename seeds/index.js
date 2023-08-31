@@ -8,10 +8,10 @@ const seedAll = async () => {
     try {
         await sequelize.sync({ force: true });
 
-        await seedTags();
-        await seedProductTags();
         await seedCategories();
         await seedProducts();
+        await seedTags();
+        await seedProductTags();
 
         console.log('Seeding completed successfully!');
     } catch (error) {
