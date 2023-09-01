@@ -60,16 +60,12 @@ router.put('/:id', async (req, res) => {
 // deletes a product by ID
 router.delete('/:id', async (req, res) => {
     try {
-        const deleteProduct = await Product.findByPkAndDelete(
-            {
-                product_name, tag_id: req.body.product_name
-            },
-            {
-                where: {
-                    id: req.params.id
-                }
-            })
-        res.json(deleteProduct);
+        const deleteProduct = await Product.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.status(200).json({ message: 'Product deleted', deleteProduct });
     } catch (err) {
         res.status(500).json({ message: 'Failed to delete product' });
     }
